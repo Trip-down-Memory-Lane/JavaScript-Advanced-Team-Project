@@ -1,7 +1,7 @@
 let BasePunchStarter  = require('./base-punch-starter.js');
 
 function validationMoviePunchStarterProperty(director, actors){
-    if (typeof(director) !== 'string') {
+    if (typeof director !== 'string') {
         throw new TypeError('Invalid type: '+ director);
     }
 
@@ -10,7 +10,7 @@ function validationMoviePunchStarterProperty(director, actors){
     }
 
     for (let actor of actors) {
-        if (typeof(actor) !== 'string') {
+        if (typeof actor !== 'string') {
             throw new TypeError('Invalid type of element : '+ actor + ' from Actors array');
         }
     }

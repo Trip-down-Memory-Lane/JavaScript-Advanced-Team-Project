@@ -7,7 +7,7 @@ function validationGamePunchStarterProperty(technologyUsed){
     }
 
     for (let tech of technologyUsed) {
-        if (typeof(tech) !== 'string') {
+        if (typeof tech !== 'string') {
             throw new TypeError('Invalid type of element : '+ tech + ' from technologyUsed array');
         }
     }
