@@ -19,8 +19,6 @@ class HomeModel {
                 `</div>`
             );
 
-            //TODO: sort database (Doc - 7.2)
-
             $(`.wrapper main`).html(
                 `<div class="home-logged-in-welcome">` +
                 `    Welcome, ` + sessionStorage[`username`] + `!` +
@@ -29,11 +27,15 @@ class HomeModel {
                 `  Top 3 PunchStarters` +
                 `</div>` +
                 `<div class="top-3-starters-wrapper">` +
-                `   <div class="punch-starter-holder"></div>` +
-                `   <div class="punch-starter-holder"></div>` +
-                `   <div class="punch-starter-holder"></div>` +
+                `   <div class="punch-starter-holder" id="first"></div>` +
+                `   <div class="punch-starter-holder" id="second"></div>` +
+                `   <div class="punch-starter-holder" id="third"></div>` +
                 `</div>`
             );
+
+            HomeModel.sortDataBaseDescending(database);
+            HomeModel.fillTop3PunchStarts(database);
+
 
             //TODO: fill holders with top 3 punchStarters (sorted db above)
 
@@ -57,6 +59,37 @@ class HomeModel {
                 '</div>'
             );
         }
+    }
+
+    static sortDataBaseDescending(database) {
+        database.sort(function(a, b) { // Sort percentage of money/target ( descending)
+            let percentA = a._accumulatedMoney / a._targetPrice;
+            let percentB = b._accumulatedMoney / b._targetPrice;
+            if (percentA < percentB) {
+                return 1;
+            } else if (percentA > percentB) {
+                return -1;
+            }
+        });
+    }
+
+    static fillTop3PunchStarts(database) {
+        let ids = [`#first`, `#second`, `#third`];
+        for (let i = 0; i < 3; i++) {
+            HomeModel.renderTop3PunchStarters(database[i], ids[i]);
+        }
+    }
+
+    static renderTop3PunchStarters(entry, id) {
+        let name = entry._name;
+        let manufacturer = entry._manufacturer;
+        let accumulatedMoney = entry._accumulatedMoney;
+        let targetMoney = entry._targetPrice;
+
+        $(id)
+            .append($(`<label>`).text(name))
+            .append($(`<label>`).text(manufacturer))
+            .append($(`<label>`).text(`${accumulatedMoney} / ${targetMoney}`));
     }
 
     attachEvents(isLoggedIn) {
