@@ -3,15 +3,15 @@ function validateProperties (id, name, manufacturer, description, genres, target
         throw new TypeError('Invalid id: '+ id);
     }
 
-    if (name !== 'string') {
+    if (typeof(name) !== 'string') {
         throw new TypeError('Invalid name: '+ name);
     }
 
-    if (manufacturer !== 'string') {
+    if (typeof(manufacturer) !== 'string') {
         throw new TypeError('Invalid manufacturer: '+ manufacturer);
     }
 
-    if (description !== 'string') {
+    if (typeof(description) !== 'string') {
         throw new TypeError('Invalid description: '+ description);
     }
 
