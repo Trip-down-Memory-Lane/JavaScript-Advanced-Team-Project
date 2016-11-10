@@ -1,4 +1,5 @@
 let BasePunchStarter = require('./base-punch-starter.js');
+
 function validateProperties(ingredients, recipe){
     if(!Array.isArray(ingredients)){
         throw new TypeError('Invalid ingredients: '+ ingredients);
