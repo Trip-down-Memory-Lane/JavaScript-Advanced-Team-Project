@@ -5,11 +5,11 @@ function validateProperties(ingredients, recipe){
         throw new TypeError('Invalid ingredients: '+ ingredients);
     }
     for(let ingredient of ingredients){
-        if(typeof ingredients!=String){
+        if(typeof ingredients!='string'){
             throw new TypeError('Invalid ingredient: '+ ingredient);
         }
     }
-    if(typeof recipe!=String){
+    if(typeof recipe!='string'){
         throw new TypeError('Invalid recipe: '+ recipe);
     }
 }
