@@ -3,8 +3,40 @@ class HomeModel {
     }
 
     render(isLoggedIn, database) {
-        if (isLoggedIn) {
-            //TODO: Implement Logged In State Logic
+        if (isLoggedIn) {   //Alex
+            $(`.wrapper header .header-button-holder`).html(
+                `<div class="header-button home-redirect">` +
+                    `<p>Home</p>` +
+                `</div>` +
+                `<div class="header-button list-redirect">` +
+                    `<p>PunchStarter List</p>` +
+                `</div>` +
+                `<div class="header-button create-redirect">` +
+                    `<p>Create</p>` +
+                `</div>` +
+                `<div class="header-button logout-redirect">` +
+                    `<p>Logout</p>` +
+                `</div>`
+            );
+
+            //TODO: sort database (Doc - 7.2)
+
+            $(`.wrapper main`).html(
+                `<div class="home-logged-in-welcome">` +
+                `    Welcome, ` + sessionStorage[`username`] + `!` +
+                `</div>` +
+                `<div class="home-logged-in-title">` +
+                `  Top 3 PunchStarters` +
+                `</div>` +
+                `<div class="top-3-starters-wrapper">` +
+                `   <div class="punch-starter-holder"></div>` +
+                `   <div class="punch-starter-holder"></div>` +
+                `   <div class="punch-starter-holder"></div>` +
+                `</div>`
+            );
+
+            //TODO: fill holders with top 3 punchStarters (sorted db above)
+
         } else {
             $('.wrapper header .header-button-holder').html(
                 '<div class="header-button home-redirect">' +
@@ -28,8 +60,24 @@ class HomeModel {
     }
 
     attachEvents(isLoggedIn) {
-        if (isLoggedIn) {
-            //TODO: Home redirect onclick
+        if (isLoggedIn) { // Alex
+            $(`.home-redirect`).on(`click`, function() {
+                $(`.wrapper main`).trigger(`changePage`, [`home`]);
+            });
+
+            $(`.list-redirect`).on(`click`, function() {
+                $(`.wrapper main`).trigger(`changePage`, [`list`]);
+            });
+
+            $(`.create-redirect`).on(`click`, function() {
+                $(`.wrapper main`).trigger(`changePage`, [`create`]);
+            });
+
+            $(`.logout-redirect`).on(`click`, function() {
+                sessionStorage.removeItem(`username`);
+                $(`.wrapper main`).trigger(`changePage`, [`home`]);
+            });
+
             //TODO: List redirect onclick
             //TODO: Create redirect onclick
 			//TODO: Logout redirect onclick
