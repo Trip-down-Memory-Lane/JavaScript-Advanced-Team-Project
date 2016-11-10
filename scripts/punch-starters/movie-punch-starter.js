@@ -1,4 +1,4 @@
-import BasePunchStarter from './base-punch-starter';
+let BasePunchStarter  = require('./base-punch-starter');
 
 class MoviePunchStarter extends BasePunchStarter{
     constructor(id, name, manufacturer, description, genres, targetPrice, director, actors){

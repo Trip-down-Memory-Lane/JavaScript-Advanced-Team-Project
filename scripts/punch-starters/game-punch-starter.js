@@ -1,4 +1,4 @@
-import BasePunchStarter from './base-punch-starter';
+let BasePunchStarter = require('./base-punch-starter.js');
 
 
 class GamePunchStarter extends BasePunchStarter{
