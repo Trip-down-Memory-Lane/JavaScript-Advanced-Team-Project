@@ -1,7 +1,6 @@
 import BasePunchStarter from './base-punch-starter';
 
 class MoviePunchStarter extends BasePunchStarter{
-	//TODO: Implement MoviePunchStarter
     constructor(id, name, manufacturer, description, genres, targetPrice, director, actors){
         super(id, name, manufacturer, description, genres, targetPrice);
         this._director = director;
