@@ -5,7 +5,7 @@ function validateProperties(ingredients, recipe){
         throw new TypeError('Invalid ingredients: '+ ingredients);
     }
     for(let ingredient of ingredients){
-        if(typeof ingredients!='string'){
+        if(typeof ingredient!='string'){
             throw new TypeError('Invalid ingredient: '+ ingredient);
         }
     }
@@ -13,6 +13,7 @@ function validateProperties(ingredients, recipe){
         throw new TypeError('Invalid recipe: '+ recipe);
     }
 }
+
 class FoodPunchStarter extends BasePunchStarter{
 	constructor(id, name, manufacturer, description, genres, targetPrice,ingredients, recipe){
 	    super(id, name, manufacturer, description, genres, targetPrice);
