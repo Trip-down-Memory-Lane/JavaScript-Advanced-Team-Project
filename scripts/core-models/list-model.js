@@ -10,7 +10,8 @@ class ListModel {
             `<tr><th>ID</th><th>Name</th><th>Manufacturer</th><th>Type</th><th>Progress</th></tr>`;
         for(let element of database){
             let typeOfElement = element.constructor.name.replace("PunchStarter", "");
-            html += `<tr><td>${element.id}</td><td>${element.name}</td><td>${element.manufacturer}</td><td>${typeOfElement}</td><td>${element.accumulatedMoney}/${element.targetPrice}</td></tr>`;
+            let progress = (Math.round(element.accumulatedMoney*10000/element.targetPrice)/100).toFixed(2)+'%';
+            html += `<tr><td>${element.id}</td><td>${element.name}</td><td>${element.manufacturer}</td><td>${typeOfElement}</td><td>${progress}</td></tr>`;
         }
 
         html+= '    </table>' +
