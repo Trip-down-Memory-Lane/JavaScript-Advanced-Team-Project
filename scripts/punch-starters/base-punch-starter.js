@@ -3,15 +3,15 @@ function validateProperties (id, name, manufacturer, description, genres, target
         throw new TypeError(`Invalid id: ${id} must be of type number`);
     }
 
-    if (typeof(name) !== 'string') {
+    if (typeof(name) !== 'string' || name === '') {
         throw new TypeError(`Invalid name: ${name} must be of type string`);
     }
 
-    if (typeof(manufacturer) !== 'string') {
+    if (typeof(manufacturer) !== 'string' || name === '') {
         throw new TypeError(`Invalid manufacturer: ${manufacturer} must be of type string`);
     }
 
-    if (typeof(description) !== 'string') {
+    if (typeof(description) !== 'string' || name === '') {
         throw new TypeError(`Invalid description: ${description} must be of type string`);
     }
 
@@ -25,7 +25,7 @@ function validateProperties (id, name, manufacturer, description, genres, target
         }
     }
 
-    if (typeof(targetPrice) !== 'number') {
+    if (Number.isNaN(targetPrice)) {
         throw new TypeError(`Invalid target price: ${targetPrice} must be of type number`);
     }
 }
