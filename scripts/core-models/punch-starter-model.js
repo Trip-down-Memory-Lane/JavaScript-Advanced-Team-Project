@@ -103,6 +103,7 @@ class PunchStarterModel {
                 <button>Donate</button>`;
 
         $('.progress-bar-inner').css('width', (progress < 100 ? (progress *0.7) + "vw" : "70vw"));
+        $('.progress-bar-outer').html(html);
     }
 }
 
