@@ -42,10 +42,10 @@ class CreateModel {
                             </div>                          
                         </div>
                         <div class="individual-parameters"></div>
-                        <div class="submit-button-holder">
-                            <button type="button">Submit PunchStarter</button>
-                        </div>
                     </form>
+                    <div class="submit-button-holder">
+                        <button type="button">Submit PunchStarter</button>
+                    </div>
                 </div>`;
         $('.wrapper main').html(html);
         this.renderCreateMovieModel();
