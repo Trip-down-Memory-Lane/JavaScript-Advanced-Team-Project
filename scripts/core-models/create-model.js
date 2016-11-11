@@ -45,32 +45,7 @@ class CreateModel {
         let mainContainer = document.createDocumentFragment();
         $(`<div class="create-title">Create a PunchStarter</div>`).appendTo(mainContainer);
         let selectListContainer = $(`<div class="punch-starter-category">`);
-        let selectList = $('<select>').on('change',(ev)=>{
-            let currentCategory = $(ev.target).val();
-            this.category=currentCategory;
-            switch(currentCategory){
-                case 'Movie':
-                    this.renderCreateMovieModel();
-                    this.attachEventsCreateMovieModel();
-                    break;
-                case 'Game':
-                    this.renderCreateGameModel();
-                    this.attachEventsCreateGameModel();
-                    break;
-                case 'Innovate':
-                    this.renderCreateInnovativeModel();
-                    this.attachEventsCreateInnovativeModel();
-                    break;
-                case 'Food':
-                    this.renderCreateFoodModel();
-                    this.attachEventsFoodModel();
-                    break;
-                case 'Crafts':
-                    this.renderCreateCraftModel();
-                    this.attachCreateCraftModel();
-                    break;
-            }
-        });
+        let selectList = $('<select>');
         for(let index in categories){
              selectList.append($(`<option value= ${index}>${index}</option>`));
         }
@@ -120,7 +95,32 @@ class CreateModel {
         $('.wrapper main').empty().append(mainContainer);
     }
     attachEvents(){
-        //TODO
+        $('.punch-starter-category select').on('change',(ev)=>{
+            let currentCategory = $(ev.target).val();
+            this.category=currentCategory;
+            switch(currentCategory){
+                case 'Movie':
+                    this.renderCreateMovieModel();
+                    this.attachEventsCreateMovieModel();
+                    break;
+                case 'Game':
+                    this.renderCreateGameModel();
+                    this.attachEventsCreateGameModel();
+                    break;
+                case 'Innovate':
+                    this.renderCreateInnovativeModel();
+                    this.attachEventsCreateInnovativeModel();
+                    break;
+                case 'Food':
+                    this.renderCreateFoodModel();
+                    this.attachEventsFoodModel();
+                    break;
+                case 'Crafts':
+                    this.renderCreateCraftModel();
+                    this.attachCreateCraftModel();
+                    break;
+            }
+        });
     }
 
     renderCreateMovieModel(){
