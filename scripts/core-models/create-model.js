@@ -101,7 +101,11 @@ class CreateModel {
         });
 
         $(`.remove-genre-button`).on(`click`, function() {
-            $(`.input-genres option:selected`).remove();
+            let genresList =  $(`.input-genres`);
+            genresList.find(':selected').remove();
+            if (genresList.children().length === 0) {
+                genresList.val('');
+            }
         });
     }
 
