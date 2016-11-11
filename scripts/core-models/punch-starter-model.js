@@ -16,6 +16,8 @@ class PunchStarterModel {
             `</div>`;
 
         $(`.wrapper main`).append(html);
+        this.renderLists();
+        this.renderProgress();
     }
 
     attachEvents(punchStarter) {
@@ -23,7 +25,8 @@ class PunchStarterModel {
     }
 
     renderLists(punchStarter) {
-
+        let html =
+            ``
     }
 
     renderProgress(punchStarter) {

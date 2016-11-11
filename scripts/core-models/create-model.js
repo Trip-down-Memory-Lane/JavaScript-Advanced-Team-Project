@@ -47,8 +47,8 @@ class CreateModel {
                                 <input class="input-genre" type="text" placeholder="Add genre...">
                             </div>
                             <div class="button-holder">
-                                <button class="add-genre-button">Add</button>
-                                <button class="remove-genre-button">Remove</button>
+                                <button class="add-genre-button" type="button" >Add</button>
+                                <button class="remove-genre-button" type="button" >Remove</button>
                             </div>
                             <label>Target Price:</label>
                              <div class="input-holder">
@@ -60,7 +60,7 @@ class CreateModel {
                         
                     </form>
                     <div class="submit-button-holder">
-                            <button type="button">Submit PunchStarter</button>
+                            <button type="button" type="button">Submit PunchStarter</button>
                         </div>
                 </div>`).appendTo(mainContainer);
         $('.wrapper main').empty().append(mainContainer);
@@ -96,20 +96,55 @@ class CreateModel {
 
         $(`.add-genre-button`).on(`click`, function() {
             let newGenre = $(`.input-genre`).val();
-            $(`.input-genres`)
-                .append($(`<option>`).val(newGenre).text(newGenre));
+            $('.input-genres').append($(`<option>`).val(newGenre).text(newGenre));
+            $('.input-genre').val('');
         });
 
         $(`.remove-genre-button`).on(`click`, function() {
-            $(`.input-genres option:selected`).remove();
+            let genresList =  $(`.input-genres`);
+            genresList.find(':selected').remove();
+            if (genresList.children().length === 0) {
+                genresList.val('');
+            }
         });
     }
 
-    renderCreateMovieModel(){
-        //TODO
+    renderCreateMovieModel() {
+        let html = `<label>Director:</label>
+                    <div class="input-holder">
+                        <input type="text" class="input-director" placeholder="Director...">
+                        
+                    </div>
+                    <label>Actors:</label>
+                    <div class="list-holder">
+                        <select class="input-actors"></select>
+                    </div>
+                    <div class="input-holder">
+                        <input class="new-actor" type="text" placeholder="Add actor...">
+                    </div>
+                    <div class="button-holder">
+                        <button class="add-actor-button" type="button" >Add</button>
+                        <button class="remove-actor-button" type="button">Remove</button>
+                    </div>`;
+        $('.individual-parameters').empty().html(html);
     }
-    attachEventsCreateMovieModel(){
-        //TODO
+
+    attachEventsCreateMovieModel() {
+        // add actor event
+        let actorsList = $('.input-actors');
+        $('.add-actor-button').on('click' , function (ev) {
+            let newActorInput = $('.new-actor');
+            actorsList.append($('<option>').text(newActorInput.val()).val((newActorInput.val())));
+            newActorInput.val('');
+        });
+
+        // remove actor event
+        $('.remove-actor-button').on('click', function () {
+            actorsList.find(":selected").remove();
+            if (actorsList.children().length === 0) {
+                actorsList.val('');
+            }
+        });
     }
 
     renderCreateGameModel(){
@@ -122,21 +157,26 @@ class CreateModel {
                 `<input class="new-technology" type="text" placeholder="Add technology..."/>` +
             `</div>` +
             `<div class="button-holder">` +
-                `<button class="add-technology-button">Add</button>` +
-                `<button class="remove-technology-button">Remove</button>` +
+                `<button class="add-technology-button" type="button">Add</button>` +
+                `<button class="remove-technology-button" type="button">Remove</button>` +
             `</div>`;
 
         $(`.individual-parameters`).empty().append(html);
     }
     attachEventsCreateGameModel(){
-        $(`.individual-parameters`).on(`click`, `.add-technology-button`, function() {
-            let newTechnology = $(`.new-technology`).val();
-            $(`.input-technologies`)
-                .append($(`<option>`).val(newTechnology).text(newTechnology));
+        let technologiesList = $('.input-technologies');
+
+        $(`.add-technology-button`).on(`click`, function() {
+            let newTechnology = $(`.new-technology`);
+            technologiesList.append($(`<option>`).val(newTechnology.val()).text(newTechnology.val()));
+            newTechnology.val('');
         });
 
-        $(`.individual-parameters`).on(`click`, `.remove-technology-button`, function() {
-            $(`.input-technologies option:selected`).remove();
+        $(`.remove-technology-button`).on(`click`, function() {
+            technologiesList.find(':selected').remove();
+            if (technologiesList.children().length === 0) {
+                technologiesList.val('');
+            }
         });
     }
 
@@ -144,7 +184,6 @@ class CreateModel {
         $(`.individual-parameters`).empty()
     }
     attachEventsCreateInnovativeModel(){
-        //TODO
     }
 
     renderCreateFoodModel(){
@@ -154,11 +193,11 @@ class CreateModel {
                 `<select class="input-ingredients"></select>` +
             `</div>` +
             `<div class="input-holder">` +
-            `   <input class="new-ingredients" type="text" placeholder="Add ingredient..."/>` +
+            `   <input class="new-ingredient" type="text" placeholder="Add ingredient..."/>` +
             `</div>` +
             `<div class="button-holder">` +
-                `<button class="add-ingredients-button">Add</button>` +
-                `<button class="remove-ingredients-button">Remove</button>` +
+                `<button class="add-ingredient-button" type="button">Add</button>` +
+                `<button class="remove-ingredient-button" type="button">Remove</button>` +
             `</div>` +
             `<div class="input-holder">` +
                 `<textarea class="input-recipe" placeholder="Recipe..." rows="2" />` +
@@ -167,24 +206,55 @@ class CreateModel {
         $(`.individual-parameters`).empty().append(html);
     }
     attachEventsCreateFoodModel(){
-        $(`.individual-parameters`).on(`click`, `.add-ingredients-button`, function() {
-            let newIngredient = $(`.new-ingredients`).val();
-            $(`.input-ingredients`)
-                .append($(`<option>`).val(newIngredient).text(newIngredient));
+        let ingredientsList = $('.input-ingredients');
+
+        $(`.add-ingredient-button`).on(`click`, function() {
+            let newIngredient = $(`.new-ingredient`);
+            ingredientsList.append($(`<option>`).val(newIngredient.val()).text(newIngredient.val()));
+            newIngredient.val('');
         });
 
-        $(`.individual-parameters`).on(`click`, `.remove-ingredients-button`, function() {
-            $(`.input-ingredients option:selected`).remove();
+        $(`.remove-ingredient-button`).on(`click`, function() {
+            ingredientsList.find(':selected').remove();
+            if (ingredientsList.children().length === 0) {
+                ingredientsList.val('');
+            }
         });
     }
 
     renderCreateCraftModel(){
-        //TODO
-    }
-    attachEventsCreateCraftModel(){
-        //TODO
+        let html = '';
+        html += `<label>Resources needed:</label>
+                    <div class="list-holder">
+                        <select class="input-resources"></select>
+                    </div>
+                    <div class="input-holder">
+                        <input class="new-resource" type="text" placeholder="Add resource...">
+                    </div>
+                    <div class="button-holder">
+                        <button class="add-resource-button" type="button">Add</button>
+                        <button class="remove-resource-button" type="button">Remove</button>
+                    </div>`;
+        $('.individual-parameters').empty().html(html);
     }
 
+    attachEventsCreateCraftModel() {
+
+        let resourcesList = $('.input-resources');
+        $('.add-resource-button').on('click' , function (ev) {
+            let newResInput = $('.new-resource');
+            resourcesList.append($('<option>').text(newResInput.val()).val(newResInput.val()));
+            newResInput.val('');
+        });
+
+        // remove actor event
+        $('.remove-resource-button').on('click', function () {
+            resourcesList.find(":selected").remove();
+            if (resourcesList.children().length === 0) {
+                resourcesList.val('');
+            }
+        });
+    }
 }
 
 module.exports = CreateModel;
