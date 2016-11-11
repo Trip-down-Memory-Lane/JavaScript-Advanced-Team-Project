@@ -123,10 +123,35 @@ class CreateModel {
     }
 
     renderCreateCraftModel(){
-        //TODO
+        let html = '';
+        html += `<label>Resources needed:</label>
+                    <div class="list-holder">
+                        <select class="input-resources"></select>
+                    </div>
+                    <div class="input-holder">
+                        <input class="new-resource" type="text" placeholder="Add resource...">
+                    </div>
+                    <div class="button-holder">
+                        <button class="add-resource-button" type="button">Add</button>
+                        <button class="remove-resource-button" type="button">Remove</button>
+                    </div>`;
+        $('.individual-parameters').empty().html(html);
     }
     attachCreateCraftModel(){
-        //TODO
+        let listOfResources = $('.input-resources');
+        $('.add-resource-button').on('click', function(ev){
+            let resourcesInput = $('new-resources');
+            listOfResources.append($('<option>').text(resourcesInput.val()));
+            resourcesInput.val('');
+        });
+
+        $('.remove-resource-button').on('click', function(ev){
+            listOfResources.find(':selected').remove();
+            if(listOfResources.children.length === 0){
+                listOfResources.val('');
+            }
+        });
+
     }
 
 }
