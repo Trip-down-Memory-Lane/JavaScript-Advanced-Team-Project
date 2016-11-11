@@ -105,11 +105,42 @@ class CreateModel {
         });
     }
 
-    renderCreateMovieModel(){
-        //TODO
+    renderCreateMovieModel() {
+        let html = `<label>Director:</label>
+                    <div class="input-holder">
+                        <input type="text" class="input-director" placeholder="Director...">
+                        
+                    </div>
+                    <label>Actors:</label>
+                    <div class="list-holder">
+                        <select class="input-actors"></select>
+                    </div>
+                    <div class="input-holder">
+                        <input class="new-actor" type="text" placeholder="Add actor...">
+                    </div>
+                    <div class="button-holder">
+                        <button class="add-actor-button" type="button" >Add</button>
+                        <button class="remove-actor-button" type="button">Remove</button>
+                    </div>`;
+        $('.individual-parameters').empty().html(html);
     }
-    attachEventsCreateMovieModel(){
-        //TODO
+
+    attachEventsCreateMovieModel() {
+        // add actor event
+        let actorsList = $('.input-actors');
+        $('.add-actor-button').on('click' , function (ev) {
+            let newActorInput = $('.new-actor');
+            actorsList.append($('<option>').text(newActorInput.val()));
+            newActorInput.val('');
+        });
+
+        // remove actor event
+        $('.remove-actor-button').on('click', function () {
+            actorsList.find(":selected").remove();
+            if (actorsList.children().length === 0) {
+                actorsList.val('');
+            }
+        });
     }
 
     renderCreateGameModel(){
