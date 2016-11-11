@@ -63,7 +63,29 @@ class CreateModel {
     }
 
     renderCreateGameModel(){
-        //TODO
+        let html =
+            `<div>` +
+                `<label></label>` +
+                `<div class="list-holder">` +
+                    `<select class="input-technologies"></select>` +
+                `</div>` +
+                `<div class="input-holder">` +
+                    `<input class="new-technology" type="text" placeholder="Add technology..."/>` +
+                `</div>` +
+                `<div>` +
+                    `<div class="button-holder">` +
+                        `<button class="add-technology-button">Add</button>` +
+                        `<button class="remove-technology-button">Remove</button>` +
+                    `</div>` +
+                    `<label>Target Price:</label>` +
+                    `<div class="input-holder">` +
+                        `<input class="input-target-price" type="number" placeholder="Target Price..."/>` +
+                    `</div>` +
+                `</div>` +
+            `</div>`;
+
+        $(`.individual-parameters`).append(html);
+
     }
     attachEventsCreateGameModel(){
         //TODO
