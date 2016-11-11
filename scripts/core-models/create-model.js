@@ -72,6 +72,8 @@ class CreateModel {
                         </div>
                 </div>`).appendTo(mainContainer);
         $('.wrapper main').empty().append(mainContainer);
+        this.renderCreateMovieModel();
+        this.attachEventsCreateMovieModel();
     }
 
     attachEvents(){
@@ -103,9 +105,11 @@ class CreateModel {
         });
 
         $(`.add-genre-button`).on(`click`, function() {
-            let newGenre = $(`.input-genre`).val();
-            $('.input-genres').append($(`<option>`).val(newGenre).text(newGenre));
-            $('.input-genre').val('');
+            let newGenre = $(`.input-genre`);
+            if (newGenre.val() !== '') {
+                $('.input-genres').append($(`<option>`).val(newGenre.val()).text(newGenre.val()));
+                newGenre.val('');
+            }
         });
 
         $(`.remove-genre-button`).on(`click`, function() {
@@ -186,8 +190,10 @@ class CreateModel {
         let actorsList = $('.input-actors');
         $('.add-actor-button').on('click' , function (ev) {
             let newActorInput = $('.new-actor');
-            actorsList.append($('<option>').text(newActorInput.val()).val((newActorInput.val())));
-            newActorInput.val('');
+            if (newActorInput.val() !== '') {
+                actorsList.append($('<option>').text(newActorInput.val()).val((newActorInput.val())));
+                newActorInput.val('');
+            }
         });
 
         // remove actor event
@@ -220,8 +226,10 @@ class CreateModel {
 
         $(`.add-technology-button`).on(`click`, function() {
             let newTechnology = $(`.new-technology`);
-            technologiesList.append($(`<option>`).val(newTechnology.val()).text(newTechnology.val()));
-            newTechnology.val('');
+            if (newTechnology.val() !== '') {
+                technologiesList.append($(`<option>`).val(newTechnology.val()).text(newTechnology.val()));
+                newTechnology.val('');
+            }
         });
 
         $(`.remove-technology-button`).on(`click`, function() {
@@ -240,7 +248,7 @@ class CreateModel {
 
     renderCreateFoodModel(){
         let html =
-            `<label></label>` +
+            `<label>Ingredients:</label>` +
             `<div class="list-holder">` +
                 `<select class="input-ingredients"></select>` +
             `</div>` +
@@ -262,8 +270,10 @@ class CreateModel {
 
         $(`.add-ingredient-button`).on(`click`, function() {
             let newIngredient = $(`.new-ingredient`);
-            ingredientsList.append($(`<option>`).val(newIngredient.val()).text(newIngredient.val()));
-            newIngredient.val('');
+            if (newIngredient.val() !== '') {
+                ingredientsList.append($(`<option>`).val(newIngredient.val()).text(newIngredient.val()));
+                newIngredient.val('');
+            }
         });
 
         $(`.remove-ingredient-button`).on(`click`, function() {
@@ -291,12 +301,13 @@ class CreateModel {
     }
 
     attachEventsCreateCraftModel() {
-
         let resourcesList = $('.input-resources');
         $('.add-resource-button').on('click' , function (ev) {
-            let newResInput = $('.new-resource');
-            resourcesList.append($('<option>').text(newResInput.val()).val(newResInput.val()));
-            newResInput.val('');
+            let newResource = $('.new-resource');
+            if (newResource.val() !== '') {
+                resourcesList.append($('<option>').text(newResource.val()).val(newResource.val()));
+                newResource.val('');
+            }
         });
 
         // remove actor event
