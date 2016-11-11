@@ -81,6 +81,7 @@ class CreateModel {
                             </div>                          
                         </div>
                         <div class="individual-parameters"></div>
+
                         
                     </form>
                     <div class="submit-button-holder">
@@ -88,8 +89,6 @@ class CreateModel {
                         </div>
                 </div>`).appendTo(mainContainer);
         $('.wrapper main').empty().append(mainContainer);
-        this.renderCreateMovieModel();
-        this.attachEventsCreateMovieModel();
     }
     attachEvents(){
         //TODO
