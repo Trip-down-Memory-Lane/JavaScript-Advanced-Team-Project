@@ -35,10 +35,6 @@ class HomeModel {
 
             HomeModel.sortDataBaseDescending(database);
             HomeModel.fillTop3PunchStarts(database);
-
-
-            //TODO: fill holders with top 3 punchStarters (sorted db above)
-
         } else {
             $('.wrapper header .header-button-holder').html(
                 '<div class="header-button home-redirect">' +

@@ -1,4 +1,33 @@
 class CreateModel {
+
+    // attachEvents() {
+    //     $(`.punch-starter-category > select`).on(`change`, function() {
+    //         let selectedCategory = $(`.punch-starter-category > select`).val();
+    //         this._category = selectedCategory;
+    //         switch (this._category) {
+    //             case`Movie`:
+    //                 this.renderCreateMovieModel();
+    //                 this.attachEventsCreateMovieModel();
+    //                 break;
+    //             case`Game`:
+    //                 this.renderCreateGameModel();
+    //                 this.attachEventsCreateGameModel();
+    //                 break;
+    //             case`Innovative`:
+    //                 this.renderCreateInnovativeModel();
+    //                 this.attachEventsCreateInnovativeModel();
+    //                 break;
+    //             case`Food`:
+    //                 this.renderCreateFoodModel();
+    //                 this.attachEventsCreateFoodModel();
+    //                 break;
+    //             case`Crafts`:
+    //                 this.renderCreateCraftModel();
+    //                 this.attachEventsCreateCraftModel();
+    //                 break;
+    //         }
+    //     });
+    // }
     render(categories){
         let html = '';
         html += `<div class="create-title">Create a PunchStarter</div>`;
@@ -131,7 +160,7 @@ class CreateModel {
 
         $(`.individual-parameters`).append(html);
     }
-    attachEventsFoodModel(){
+    attachEventsCreateFoodModel(){
         $(`.individual-parameters`).on(`click`, `.add-ingredients-button`, function() {
             let newIngredient = $(`.new-ingredients`).val();
             $(`.input-ingredients`)
@@ -146,7 +175,7 @@ class CreateModel {
     renderCreateCraftModel(){
         //TODO
     }
-    attachCreateCraftModel(){
+    attachEventsCreateCraftModel(){
         //TODO
     }
 
