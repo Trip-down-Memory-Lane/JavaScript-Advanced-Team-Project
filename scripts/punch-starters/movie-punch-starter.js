@@ -14,7 +14,6 @@ function validationMoviePunchStarterProperty(director, actors){
             throw new TypeError('Invalid type of element : '+ actor + ' from Actors array');
         }
     }
-
 }
 
 class MoviePunchStarter extends BasePunchStarter{
