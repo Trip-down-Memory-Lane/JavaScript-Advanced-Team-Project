@@ -28,16 +28,55 @@ class CreateModel {
     //         }
     //     });
     // }
-    render(categories){
-        let html = '';
-        html += `<div class="create-title">Create a PunchStarter</div>`;
-        html += `<div class="punch-starter-category"><select>`;
-        for(let index in categories){
-            html += `<option value= ${index}>${index}</option>`;
-        }
-        html +=`</select></div>`;
+    constructor() {
+        this.category='Movie';
+    }
 
-        html += `<div class="create-form-holder">
+    set category(val){
+        this._category=val;
+        $('.punch-starter-category select').val(val);
+
+
+    }
+    get category() {
+        return this._category;
+    }
+    render(categories){
+        let mainContainer = document.createDocumentFragment();
+        $(`<div class="create-title">Create a PunchStarter</div>`).appendTo(mainContainer);
+        let selectListContainer = $(`<div class="punch-starter-category">`);
+        let selectList = $('<select>').on('change',(ev)=>{
+            let currentCategory = $(ev.target).val();
+            this.category=currentCategory;
+            switch(currentCategory){
+                case 'Movie':
+                    this.renderCreateMovieModel();
+                    this.attachEventsCreateMovieModel();
+                    break;
+                case 'Game':
+                    this.renderCreateGameModel();
+                    this.attachEventsCreateGameModel();
+                    break;
+                case 'Innovate':
+                    this.renderCreateInnovativeModel();
+                    this.attachEventsCreateInnovativeModel();
+                    break;
+                case 'Food':
+                    this.renderCreateFoodModel();
+                    this.attachEventsFoodModel();
+                    break;
+                case 'Crafts':
+                    this.renderCreateCraftModel();
+                    this.attachCreateCraftModel();
+                    break;
+            }
+        });
+        for(let index in categories){
+             selectList.append($(`<option value= ${index}>${index}</option>`));
+        }
+        selectList.appendTo(selectListContainer);
+        selectListContainer.appendTo(mainContainer);
+         $(`<div class="create-form-holder">
                     <form>
                         <div class="main-parameters">
                             <label>Name:</label>
@@ -71,14 +110,14 @@ class CreateModel {
                             </div>                          
                         </div>
                         <div class="individual-parameters"></div>
+
+                        
                     </form>
                     <div class="submit-button-holder">
-                        <button type="button">Submit PunchStarter</button>
-                    </div>
-                </div>`;
-        $('.wrapper main').html(html);
-        this.renderCreateMovieModel();
-        this.attachEventsCreateMovieModel();
+                            <button type="button">Submit PunchStarter</button>
+                        </div>
+                </div>`).appendTo(mainContainer);
+        $('.wrapper main').empty().append(mainContainer);
     }
     attachEvents(){
         //TODO
