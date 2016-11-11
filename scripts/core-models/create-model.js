@@ -134,7 +134,7 @@ class CreateModel {
         let actorsList = $('.input-actors');
         $('.add-actor-button').on('click' , function (ev) {
             let newActorInput = $('.new-actor');
-            actorsList.append($('<option>').text(newActorInput.val()));
+            actorsList.append($('<option>').text(newActorInput.val()).val((newActorInput.val())));
             newActorInput.val('');
         });
 
@@ -164,14 +164,19 @@ class CreateModel {
         $(`.individual-parameters`).empty().append(html);
     }
     attachEventsCreateGameModel(){
-        $(`.individual-parameters`).on(`click`, `.add-technology-button`, function() {
-            let newTechnology = $(`.new-technology`).val();
-            $(`.input-technologies`)
-                .append($(`<option>`).val(newTechnology).text(newTechnology));
+        let technologiesList = $('.input-technologies');
+
+        $(`.add-technology-button`).on(`click`, function() {
+            let newTechnology = $(`.new-technology`);
+            technologiesList.append($(`<option>`).val(newTechnology.val()).text(newTechnology.val()));
+            newTechnology.val('');
         });
 
-        $(`.individual-parameters`).on(`click`, `.remove-technology-button`, function() {
-            $(`.input-technologies option:selected`).remove();
+        $(`.remove-technology-button`).on(`click`, function() {
+            technologiesList.find(':selected').remove();
+            if (technologiesList.children().length === 0) {
+                technologiesList.val('');
+            }
         });
     }
 
@@ -188,11 +193,11 @@ class CreateModel {
                 `<select class="input-ingredients"></select>` +
             `</div>` +
             `<div class="input-holder">` +
-            `   <input class="new-ingredients" type="text" placeholder="Add ingredient..."/>` +
+            `   <input class="new-ingredient" type="text" placeholder="Add ingredient..."/>` +
             `</div>` +
             `<div class="button-holder">` +
-                `<button class="add-ingredients-button" type="button">Add</button>` +
-                `<button class="remove-ingredients-button" type="button">Remove</button>` +
+                `<button class="add-ingredient-button" type="button">Add</button>` +
+                `<button class="remove-ingredient-button" type="button">Remove</button>` +
             `</div>` +
             `<div class="input-holder">` +
                 `<textarea class="input-recipe" placeholder="Recipe..." rows="2" />` +
@@ -201,14 +206,19 @@ class CreateModel {
         $(`.individual-parameters`).empty().append(html);
     }
     attachEventsCreateFoodModel(){
-        $(`.individual-parameters`).on(`click`, `.add-ingredients-button`, function() {
-            let newIngredient = $(`.new-ingredients`).val();
-            $(`.input-ingredients`)
-                .append($(`<option>`).val(newIngredient).text(newIngredient));
+        let ingredientsList = $('.input-ingredients');
+
+        $(`.add-ingredient-button`).on(`click`, function() {
+            let newIngredient = $(`.new-ingredient`);
+            ingredientsList.append($(`<option>`).val(newIngredient.val()).text(newIngredient.val()));
+            newIngredient.val('');
         });
 
-        $(`.individual-parameters`).on(`click`, `.remove-ingredients-button`, function() {
-            $(`.input-ingredients option:selected`).remove();
+        $(`.remove-ingredient-button`).on(`click`, function() {
+            ingredientsList.find(':selected').remove();
+            if (ingredientsList.children().length === 0) {
+                ingredientsList.val('');
+            }
         });
     }
 
@@ -228,18 +238,20 @@ class CreateModel {
         $('.individual-parameters').empty().html(html);
     }
 
-    attachCreateCraftModel() {
-        let listOfResources = $('.input-resources');
-        $('.add-resource-button').on('click', function (ev) {
-            let resourcesInput = $('new-resources');
-            listOfResources.append($('<option>').text(resourcesInput.val()));
-            resourcesInput.val('');
+    attachEventsCreateCraftModel() {
+
+        let resourcesList = $('.input-resources');
+        $('.add-resource-button').on('click' , function (ev) {
+            let newResInput = $('.new-resource');
+            resourcesList.append($('<option>').text(newResInput.val()).val(newResInput.val()));
+            newResInput.val('');
         });
 
-        $('.remove-resource-button').on('click', function (ev) {
-            listOfResources.find(':selected').remove();
-            if (listOfResources.children.length === 0) {
-                listOfResources.val('');
+        // remove actor event
+        $('.remove-resource-button').on('click', function () {
+            resourcesList.find(":selected").remove();
+            if (resourcesList.children().length === 0) {
+                resourcesList.val('');
             }
         });
     }
