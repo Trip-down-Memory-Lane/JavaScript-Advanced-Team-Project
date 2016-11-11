@@ -1,3 +1,11 @@
+let MoviePunchStarter = require('../punch-starters/movie-punch-starter.js');
+let GamePunchStarter = require('../punch-starters/game-punch-starter.js');
+let InnovativePunchStarter = require('../punch-starters/innovative-punch-starter.js');
+let FoodPunchStarter = require('../punch-starters/food-punch-starter.js');
+let CraftsPunchStarter = require('../punch-starters/crafts-punch-starter.js');
+
+let id = 6;
+
 class CreateModel {
     constructor() {
         this.category = 'Movie';
@@ -52,7 +60,7 @@ class CreateModel {
                             </div>
                             <label>Target Price:</label>
                              <div class="input-holder">
-                                <input class="input-targe-price" type="number" placeholder="Target Price...">
+                                <input class="input-target-price" type="number" placeholder="Target Price...">
                             </div>                          
                         </div>
                         <div class="individual-parameters"></div>
@@ -64,6 +72,8 @@ class CreateModel {
                         </div>
                 </div>`).appendTo(mainContainer);
         $('.wrapper main').empty().append(mainContainer);
+        this.renderCreateMovieModel();
+        this.attachEventsCreateMovieModel();
     }
 
     attachEvents(){
@@ -95,9 +105,11 @@ class CreateModel {
         });
 
         $(`.add-genre-button`).on(`click`, function() {
-            let newGenre = $(`.input-genre`).val();
-            $('.input-genres').append($(`<option>`).val(newGenre).text(newGenre));
-            $('.input-genre').val('');
+            let newGenre = $(`.input-genre`);
+            if (newGenre.val() !== '') {
+                $('.input-genres').append($(`<option>`).val(newGenre.val()).text(newGenre.val()));
+                newGenre.val('');
+            }
         });
 
         $(`.remove-genre-button`).on(`click`, function() {
@@ -105,6 +117,50 @@ class CreateModel {
             genresList.find(':selected').remove();
             if (genresList.children().length === 0) {
                 genresList.val('');
+            }
+        });
+
+        $('.submit-button-holder button').on('click', function (ev) {
+            let selectedCategory = $('.punch-starter-category select').val();
+            let name = $('.input-name').val();
+            let manufacturer = $('.input-manufacturer').val();
+            let description = $('.input-description').val();
+            let genres = $('.input-genres').children().toArray().map(x => $(x).text());
+            let targetPrice = Number($('.input-target-price').val());
+            let mainEvenetWrapper = $('.wrapper main');
+
+            switch (selectedCategory) {
+                case 'Movie':
+                    let director = $('.input-director').val();
+                    let actors = $('.input-actors').children().toArray().map(x => $(x).text());
+                    let newMovie =
+                        new MoviePunchStarter(id++, name, manufacturer, description, genres, targetPrice, director, actors);
+                    mainEvenetWrapper.trigger('createPunchStarter', newMovie);
+                    break;
+                case 'Game':
+                    let technologies = $('.input-technologies').children().toArray().map(x => $(x).text());
+                    console.log(technologies);
+                    let newGame =
+                        new GamePunchStarter(id++, name, manufacturer, description, genres, targetPrice, technologies);
+                    mainEvenetWrapper.trigger('createPunchStarter', newGame);
+                    break;
+                case 'Innovative':
+                    let newInnovation = new InnovativePunchStarter(id++, name, manufacturer, description, genres, targetPrice);
+                    mainEvenetWrapper.trigger('createPunchStarter', newInnovation);
+                    break;
+                case 'Food':
+                    let recipe = $('.input-recipe').val();
+                    let ingredients = $('.input-ingredients').children().toArray().map(x => $(x).text());
+                    let newFood =
+                        new FoodPunchStarter(id++, name, manufacturer, description, genres, targetPrice, ingredients, recipe);
+                    mainEvenetWrapper.trigger('createPunchStarter', newFood);
+                    break;
+                case 'Crafts':
+                    let resources = $('.input-resources').children().toArray().map(x => $(x).text());
+                    let newCrafts =
+                        new CraftsPunchStarter(id++, name, manufacturer, description, genres, targetPrice, resources);
+                    mainEvenetWrapper.trigger('createPunchStarter', newCrafts);
+                    break;
             }
         });
     }
@@ -134,8 +190,10 @@ class CreateModel {
         let actorsList = $('.input-actors');
         $('.add-actor-button').on('click' , function (ev) {
             let newActorInput = $('.new-actor');
-            actorsList.append($('<option>').text(newActorInput.val()).val((newActorInput.val())));
-            newActorInput.val('');
+            if (newActorInput.val() !== '') {
+                actorsList.append($('<option>').text(newActorInput.val()).val((newActorInput.val())));
+                newActorInput.val('');
+            }
         });
 
         // remove actor event
@@ -168,8 +226,10 @@ class CreateModel {
 
         $(`.add-technology-button`).on(`click`, function() {
             let newTechnology = $(`.new-technology`);
-            technologiesList.append($(`<option>`).val(newTechnology.val()).text(newTechnology.val()));
-            newTechnology.val('');
+            if (newTechnology.val() !== '') {
+                technologiesList.append($(`<option>`).val(newTechnology.val()).text(newTechnology.val()));
+                newTechnology.val('');
+            }
         });
 
         $(`.remove-technology-button`).on(`click`, function() {
@@ -188,7 +248,7 @@ class CreateModel {
 
     renderCreateFoodModel(){
         let html =
-            `<label></label>` +
+            `<label>Ingredients:</label>` +
             `<div class="list-holder">` +
                 `<select class="input-ingredients"></select>` +
             `</div>` +
@@ -210,8 +270,10 @@ class CreateModel {
 
         $(`.add-ingredient-button`).on(`click`, function() {
             let newIngredient = $(`.new-ingredient`);
-            ingredientsList.append($(`<option>`).val(newIngredient.val()).text(newIngredient.val()));
-            newIngredient.val('');
+            if (newIngredient.val() !== '') {
+                ingredientsList.append($(`<option>`).val(newIngredient.val()).text(newIngredient.val()));
+                newIngredient.val('');
+            }
         });
 
         $(`.remove-ingredient-button`).on(`click`, function() {
@@ -239,12 +301,13 @@ class CreateModel {
     }
 
     attachEventsCreateCraftModel() {
-
         let resourcesList = $('.input-resources');
         $('.add-resource-button').on('click' , function (ev) {
-            let newResInput = $('.new-resource');
-            resourcesList.append($('<option>').text(newResInput.val()).val(newResInput.val()));
-            newResInput.val('');
+            let newResource = $('.new-resource');
+            if (newResource.val() !== '') {
+                resourcesList.append($('<option>').text(newResource.val()).val(newResource.val()));
+                newResource.val('');
+            }
         });
 
         // remove actor event
