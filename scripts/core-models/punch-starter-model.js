@@ -30,7 +30,17 @@ class PunchStarterModel {
     }
 
     renderProgress(punchStarter) {
+        let html = '';
+        html += `<p>Progress</p>
+                 <div class="donate-holder">
+                    <div class="progress-bar-outer">
+                        <div class="progress-bar-inner">Math.round(${punchStarter.accumulatedMoney}*100/${punchStarter.targetPrice})</div>
+                    </div>
+                </div>
+                <input type="number"/>
+                <button>Donate</button>`;
 
+        $('.progress-bar-inner').css('width', (progress < 100 ? (progress *0.7) + "vw" : "70vw"));
     }
 }
 
