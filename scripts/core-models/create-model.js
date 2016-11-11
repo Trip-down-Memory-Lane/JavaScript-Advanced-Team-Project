@@ -47,8 +47,8 @@ class CreateModel {
                                 <input class="input-genre" type="text" placeholder="Add genre...">
                             </div>
                             <div class="button-holder">
-                                <button class="add-genre-button">Add</button>
-                                <button class="remove-genre-button">Remove</button>
+                                <button class="add-genre-button" type="button" >Add</button>
+                                <button class="remove-genre-button" type="button" >Remove</button>
                             </div>
                             <label>Target Price:</label>
                              <div class="input-holder">
@@ -60,7 +60,7 @@ class CreateModel {
                         
                     </form>
                     <div class="submit-button-holder">
-                            <button type="button">Submit PunchStarter</button>
+                            <button type="button" type="button">Submit PunchStarter</button>
                         </div>
                 </div>`).appendTo(mainContainer);
         $('.wrapper main').empty().append(mainContainer);
@@ -153,8 +153,8 @@ class CreateModel {
                 `<input class="new-technology" type="text" placeholder="Add technology..."/>` +
             `</div>` +
             `<div class="button-holder">` +
-                `<button class="add-technology-button">Add</button>` +
-                `<button class="remove-technology-button">Remove</button>` +
+                `<button class="add-technology-button" type="button">Add</button>` +
+                `<button class="remove-technology-button" type="button">Remove</button>` +
             `</div>`;
 
         $(`.individual-parameters`).empty().append(html);
@@ -187,8 +187,8 @@ class CreateModel {
             `   <input class="new-ingredients" type="text" placeholder="Add ingredient..."/>` +
             `</div>` +
             `<div class="button-holder">` +
-                `<button class="add-ingredients-button">Add</button>` +
-                `<button class="remove-ingredients-button">Remove</button>` +
+                `<button class="add-ingredients-button" type="button">Add</button>` +
+                `<button class="remove-ingredients-button" type="button">Remove</button>` +
             `</div>` +
             `<div class="input-holder">` +
                 `<textarea class="input-recipe" placeholder="Recipe..." rows="2" />` +
