@@ -96,8 +96,8 @@ class CreateModel {
 
         $(`.add-genre-button`).on(`click`, function() {
             let newGenre = $(`.input-genre`).val();
-            $(`.input-genres`)
-                .append($(`<option>`).val(newGenre).text(newGenre));
+            $('.input-genres').append($(`<option>`).val(newGenre).text(newGenre));
+            $('.input-genre').val('');
         });
 
         $(`.remove-genre-button`).on(`click`, function() {
@@ -175,7 +175,6 @@ class CreateModel {
         $(`.individual-parameters`).empty()
     }
     attachEventsCreateInnovativeModel(){
-        //TODO
     }
 
     renderCreateFoodModel(){
