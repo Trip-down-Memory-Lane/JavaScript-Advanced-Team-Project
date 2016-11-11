@@ -1,17 +1,17 @@
 class CreateModel {
     constructor() {
-        this.category='Movie';
+        this.category = 'Movie';
     }
 
     set category(val){
         this._category=val;
         $('.punch-starter-category select').val(val);
-
-
     }
+
     get category() {
         return this._category;
     }
+
     render(categories){
         let mainContainer = document.createDocumentFragment();
         $(`<div class="create-title">Create a PunchStarter</div>`).appendTo(mainContainer);
@@ -65,32 +65,43 @@ class CreateModel {
                 </div>`).appendTo(mainContainer);
         $('.wrapper main').empty().append(mainContainer);
     }
+
     attachEvents(){
         $('.punch-starter-category select').on('change',(ev)=>{
-            let currentCategory = $(ev.target).val();
-            this.category=currentCategory;
-            switch(currentCategory){
-                case 'Movie':
+            let selectedCategory = $(ev.target).val();
+            this.category = selectedCategory;
+            switch (this.category) {
+                case`Movie`:
                     this.renderCreateMovieModel();
                     this.attachEventsCreateMovieModel();
                     break;
-                case 'Game':
+                case`Game`:
                     this.renderCreateGameModel();
                     this.attachEventsCreateGameModel();
                     break;
-                case 'Innovate':
+                case`Innovative`:
                     this.renderCreateInnovativeModel();
                     this.attachEventsCreateInnovativeModel();
                     break;
-                case 'Food':
+                case`Food`:
                     this.renderCreateFoodModel();
-                    this.attachEventsFoodModel();
+                    this.attachEventsCreateFoodModel();
                     break;
-                case 'Crafts':
+                case`Crafts`:
                     this.renderCreateCraftModel();
-                    this.attachCreateCraftModel();
+                    this.attachEventsCreateCraftModel();
                     break;
             }
+        });
+
+        $(`.add-genre-button`).on(`click`, function() {
+            let newGenre = $(`.input-genre`).val();
+            $(`.input-genres`)
+                .append($(`<option>`).val(newGenre).text(newGenre));
+        });
+
+        $(`.remove-genre-button`).on(`click`, function() {
+            $(`.input-genres option:selected`).remove();
         });
     }
 
@@ -102,24 +113,69 @@ class CreateModel {
     }
 
     renderCreateGameModel(){
-        //TODO
+        let html =
+            `<label>Technologies:</label>` +
+            `<div class="list-holder">` +
+                `<select class="input-technologies"></select>` +
+            `</div>` +
+            `<div class="input-holder">` +
+                `<input class="new-technology" type="text" placeholder="Add technology..."/>` +
+            `</div>` +
+            `<div class="button-holder">` +
+                `<button class="add-technology-button">Add</button>` +
+                `<button class="remove-technology-button">Remove</button>` +
+            `</div>`;
+
+        $(`.individual-parameters`).empty().append(html);
     }
     attachEventsCreateGameModel(){
-        //TODO
+        $(`.individual-parameters`).on(`click`, `.add-technology-button`, function() {
+            let newTechnology = $(`.new-technology`).val();
+            $(`.input-technologies`)
+                .append($(`<option>`).val(newTechnology).text(newTechnology));
+        });
+
+        $(`.individual-parameters`).on(`click`, `.remove-technology-button`, function() {
+            $(`.input-technologies option:selected`).remove();
+        });
     }
 
     renderCreateInnovativeModel(){
-        //TODO
+        $(`.individual-parameters`).empty()
     }
     attachEventsCreateInnovativeModel(){
         //TODO
     }
 
     renderCreateFoodModel(){
-        //TODO
+        let html =
+            `<label></label>` +
+            `<div class="list-holder">` +
+                `<select class="input-ingredients"></select>` +
+            `</div>` +
+            `<div class="input-holder">` +
+            `   <input class="new-ingredients" type="text" placeholder="Add ingredient..."/>` +
+            `</div>` +
+            `<div class="button-holder">` +
+                `<button class="add-ingredients-button">Add</button>` +
+                `<button class="remove-ingredients-button">Remove</button>` +
+            `</div>` +
+            `<div class="input-holder">` +
+                `<textarea class="input-recipe" placeholder="Recipe..." rows="2" />` +
+            `</div>`;
+
+        $(`.individual-parameters`).empty().append(html);
     }
-    attachEventsFoodModel(){
-        //TODO
+    attachEventsCreateFoodModel(){
+        $(`.individual-parameters`).on(`click`, `.add-ingredients-button`, function() {
+            let newIngredient = $(`.new-ingredients`).val();
+            $(`.input-ingredients`)
+                .append($(`<option>`).val(newIngredient).text(newIngredient));
+        });
+
+        $(`.individual-parameters`).on(`click`, `.remove-ingredients-button`, function() {
+            $(`.input-ingredients option:selected`).remove();
+        });
     }
 
     renderCreateCraftModel(){
@@ -137,23 +193,22 @@ class CreateModel {
                     </div>`;
         $('.individual-parameters').empty().html(html);
     }
-    attachCreateCraftModel(){
+
+    attachCreateCraftModel() {
         let listOfResources = $('.input-resources');
-        $('.add-resource-button').on('click', function(ev){
+        $('.add-resource-button').on('click', function (ev) {
             let resourcesInput = $('new-resources');
             listOfResources.append($('<option>').text(resourcesInput.val()));
             resourcesInput.val('');
         });
 
-        $('.remove-resource-button').on('click', function(ev){
+        $('.remove-resource-button').on('click', function (ev) {
             listOfResources.find(':selected').remove();
-            if(listOfResources.children.length === 0){
+            if (listOfResources.children.length === 0) {
                 listOfResources.val('');
             }
         });
-
     }
-
 }
 
 module.exports = CreateModel;
