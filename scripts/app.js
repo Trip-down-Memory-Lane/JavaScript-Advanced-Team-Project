@@ -38,9 +38,10 @@ $('.wrapper main').on('changePage', function(event, location, punchStarter) {
             createModel.render(Categories);
             createModel.attachEvents();
             break;
-        // case "punch":
-        //
-        //     break;
+        case "punch":
+            punchStarterModel.render(punchStarter);
+            punchStarterModel.attachEvents(punchStarter);
+            break;
     }
 });
 

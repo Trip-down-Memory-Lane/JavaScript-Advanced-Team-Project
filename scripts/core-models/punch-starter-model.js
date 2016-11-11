@@ -6,14 +6,14 @@ class PunchStarterModel {
             '<div class="punch-starter-wrapper">' +
                 `<div class="punch-starter-caption">` +
                     `<label>${punchStarter.name}</label>` +
-                    `<label>${punchStarter.constructor.name.replace('PunchStarter', '')}</label>
-                </div>` +
+                    `<label>${punchStarter.constructor.name.replace('PunchStarter', '')}</label>` +
+                `</div>` +
                 `<div class="punch-starter-resume">` +
                     `<label>Manufacturer:</label>` +
                     `<p>${punchStarter.manufacturer}</p>` +
                     `<label>Description:</label>` +
-                    `<p>${punchStarter.description}</p>
-                </div>` +
+                    `<p>${punchStarter.description}</p>` +
+                `</div>` +
                 `<div class="punch-starter-lists"></div>` +
                 `<div class="punch-starter-progress"></div>` +
             `</div>`;
@@ -28,14 +28,8 @@ class PunchStarterModel {
         $(`.punch-starter-progress button`).on(`click`, function() {
              let donation = $(`.punch-starter-progress input`).val();
             punchStarter._accumulatedMoney += Number(donation);
-            // $(`.wrapper main`).trigger(`changePage`, null, punchStarter);
-            that.reloadModel(punchStarter);
+            $(`.wrapper main`).trigger(`changePage`, [`punch`, punchStarter]);
         });
-    }
-
-    reloadModel(punchStarter) {
-        this.render(punchStarter);
-        this.attachEvents(punchStarter);
     }
 
     renderLists(punchStarter) {
@@ -43,12 +37,10 @@ class PunchStarterModel {
             `<div>` +
                 `<label>Genres</label>` +
                 `<ul>`;
-
-        for (let genre of punchStarter.genres) {
-            html += `<li>${genre}</li>`;
-        }
-
-        html += '</ul></div>';
+        punchStarter.genres.forEach(x => html += `<li>${x}</li>`);
+        html +=
+                `</ul>` +
+            `</div>`;
 
         switch (punchStarter.constructor.name) {
             case`MoviePunchStarter`:

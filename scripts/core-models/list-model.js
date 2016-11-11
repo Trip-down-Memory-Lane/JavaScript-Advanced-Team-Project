@@ -1,6 +1,3 @@
-let PunchStarterModel = require("./punch-starter-model.js");
-let punchStarterModel = new PunchStarterModel();
-
 function getPunchStarter (id, database) {
     for (let punchStarter of database) {
         if (punchStarter.id === id) {
@@ -44,9 +41,7 @@ class ListModel {
                 $(element).on(`click`, function() {
                     let punchStarterId = Number($(this).children()[0].textContent);
                     let punchStarter = getPunchStarter(punchStarterId, database);
-                    // console.log(punchStarter);
-                    // $(`.wrapper main`).trigger(`changePage`, [`punch`, punchStarter]);
-                    punchStarterModel.reloadModel(punchStarter);
+                    $(`.wrapper main`).trigger(`changePage`, [`punch`, punchStarter]);
                 });
             }
         });
