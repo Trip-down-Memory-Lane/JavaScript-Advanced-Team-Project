@@ -115,7 +115,8 @@ class PunchStarterModel {
                 </div>`;
 
         $('.punch-starter-progress').html(html);
-        $('.progress-bar-inner').css('width', (progress < 10 ? (progress * 0.7) + "vw" : "70vw"));
+        // Fixed (progress < 10) to (progress < 100) to make a properly working progress barr up to 100%.
+        $('.progress-bar-inner').css('width', (progress < 100 ? (progress * 0.7) + "vw" : "70vw"));
     }
 }
 
