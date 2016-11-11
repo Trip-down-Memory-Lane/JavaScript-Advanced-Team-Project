@@ -21,6 +21,11 @@ class PunchStarterModel {
     }
 
     attachEvents(punchStarter) {
+        $(`.punch-starter-progress button`).on(`click`, function() {
+             let donation = $(`.punch-starter-progress input`).val();
+            punchStarter._accumulatedMoney += donation;
+        });
+
 
     }
 
@@ -102,6 +107,7 @@ class PunchStarterModel {
                 <input type="number"/>
                 <button>Donate</button>`;
 
+        $(`.punch-starter-progress`).append(html);
         $('.progress-bar-inner').css('width', (progress < 100 ? (progress *0.7) + "vw" : "70vw"));
     }
 }
