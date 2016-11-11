@@ -1,6 +1,7 @@
 class PunchStarterModel {
 
     render(punchStarter) {
+        console.log(`rendering`);
         let html =
             '<div class="punch-starter-wrapper">' +
                 `<div class="punch-starter-caption">` +
@@ -23,12 +24,18 @@ class PunchStarterModel {
     }
 
     attachEvents(punchStarter) {
+        let that = this;
         $(`.punch-starter-progress button`).on(`click`, function() {
              let donation = $(`.punch-starter-progress input`).val();
-            punchStarter._accumulatedMoney += donation;
+            punchStarter._accumulatedMoney += Number(donation);
+            // $(`.wrapper main`).trigger(`changePage`, null, punchStarter);
+            that.reloadModel(punchStarter);
         });
+    }
 
-
+    reloadModel(punchStarter) {
+        this.render(punchStarter);
+        this.attachEvents(punchStarter);
     }
 
     renderLists(punchStarter) {
@@ -62,7 +69,7 @@ class PunchStarterModel {
             case`GamePunchStarter`:
                 html +=
                     `<div>` +
-                        `<lable>Technologies Used</lable>` +
+                        `<label>Technologies Used</label>` +
                         `<ul>`;
                 punchStarter._technologiesUsed.forEach(x => html += `<li>${x}</li>`);
                 html +=
