@@ -62,6 +62,7 @@ class CreateModel {
         //TODO
     }
 
+    //TODO: test render and events.
     renderCreateGameModel(){
         let html =
             `<div>` +
@@ -85,10 +86,17 @@ class CreateModel {
             `</div>`;
 
         $(`.individual-parameters`).append(html);
-
     }
     attachEventsCreateGameModel(){
-        //TODO
+        $(`.individual-parameters`).on(`click`, `.add-technology-button`, function() {
+            let newTechnology = $(`.new-technology`).val();
+            $(`.input-technologies`)
+                .append($(`<option>`).val(newTechnology).text(newTechnology));
+        });
+
+        $(`.individual-parameters`).on(`click`, `.remove-technology-button`, function() {
+            $(`.input-technologies option:selected`).remove();
+        });
     }
 
     renderCreateInnovativeModel(){
@@ -99,10 +107,40 @@ class CreateModel {
     }
 
     renderCreateFoodModel(){
-        //TODO
+        let html =
+            `<div>` +
+                `<label></label>` +
+                `<div class="list-holder">` +
+                    `<select class="input-ingredients"></select>` +
+                `</div>` +
+                `<div class="input-holder">` +
+                `   <input class="new-ingredients" type="text" placeholder="Add ingredient..."/>` +
+                `</div>` +
+                `<div>` +
+                    `<div class="button-holder">` +
+                        `<button class="add-ingredients-button">Add</button>` +
+                        `<button class="remove-ingredients-button">Remove</button>` +
+                    `</div>` +
+                    `<label>Target Price:</label>` +
+                    `<div class="input-holder">` +
+                        `<input class="input-target-price" type="number" placeholder="Target Price..."/>` +
+                    `</div>` +
+                `</div>` +
+                `<textarea class="input-recipe" placeholder="Recipe...">` +
+            `</div>`;
+
+        $(`.individual-parameters`).append(html);
     }
     attachEventsFoodModel(){
-        //TODO
+        $(`.individual-parameters`).on(`click`, `.add-ingredients-button`, function() {
+            let newIngredient = $(`.new-ingredients`).val();
+            $(`.input-ingredients`)
+                .append($(`<option>`).val(newIngredient).text(newIngredient));
+        });
+
+        $(`.individual-parameters`).on(`click`, `.remove-ingredients-button`, function() {
+            $(`.input-ingredients option:selected`).remove();
+        });
     }
 
     renderCreateCraftModel(){
