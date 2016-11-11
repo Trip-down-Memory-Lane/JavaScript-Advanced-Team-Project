@@ -4,20 +4,22 @@ class PunchStarterModel {
         let html =
             '<div class="punch-starter-wrapper">' +
                 `<div class="punch-starter-caption">` +
-                    `<label>${punchStarter._name}</label>` +
-                    `<label>${punchStarter.constructor.name}</label>` +
+                    `<label>${punchStarter.name}</label>` +
+                    `<label>${punchStarter.constructor.name.replace('PunchStarter', '')}</label>
+                </div>` +
                 `<div class="punch-starter-resume">` +
                     `<label>Manufacturer:</label>` +
-                    `<p>${punchStarter._manufacturer}</p>` +
+                    `<p>${punchStarter.manufacturer}</p>` +
                     `<label>Description:</label>` +
-                    `<p>${punchStarter._description}</p>` +
-                `<div class="punch-starter-lists">` +
-                `<div class="punch-starter-progress">` +
+                    `<p>${punchStarter.description}</p>
+                </div>` +
+                `<div class="punch-starter-lists"></div>` +
+                `<div class="punch-starter-progress"></div>` +
             `</div>`;
 
-        $(`.wrapper main`).append(html);
-        this.renderLists();
-        this.renderProgress();
+        $(`.wrapper main`).empty().append(html);
+        this.renderLists(punchStarter);
+        this.renderProgress(punchStarter);
     }
 
     attachEvents(punchStarter) {
@@ -29,10 +31,13 @@ class PunchStarterModel {
             `<div>` +
                 `<label>Genres</label>` +
                 `<ul>`;
-        punchStarter._genres.forEach(x => html += `<li>${x}</li>`);
-        html +=
-                `</ul>` +
-            `</div>`;
+
+        for (let genre of punchStarter.genres) {
+            html += `<li>${genre}</li>`;
+        }
+
+        html += '</ul></div>';
+
         switch (punchStarter.constructor.name) {
             case`MoviePunchStarter`:
                 html +=
@@ -93,17 +98,21 @@ class PunchStarterModel {
 
     renderProgress(punchStarter) {
         let html = '';
+        let progress = Math.round(punchStarter.accumulatedMoney*100/punchStarter.targetPrice);
+        if (Number.isNaN(progress) || !progress) {
+            progress = 0;
+        }
         html += `<p>Progress</p>
                  <div class="donate-holder">
                     <div class="progress-bar-outer">
-                        <div class="progress-bar-inner">Math.round(${punchStarter.accumulatedMoney}*100/${punchStarter.targetPrice})</div>
+                        <div class="progress-bar-inner">${progress}%</div>
                     </div>
-                </div>
-                <input type="number"/>
-                <button>Donate</button>`;
+                    <input type="number"/>
+                    <button>Donate</button>
+                </div>`;
 
-        $('.progress-bar-inner').css('width', (progress < 100 ? (progress *0.7) + "vw" : "70vw"));
-        $('.progress-bar-outer').html(html);
+        $('.progress-bar-inner').css('width', (progress < 10 ? (progress * 0.7) + "vw" : "70vw"));
+        $('.punch-starter-progress').html(html);
     }
 }
 

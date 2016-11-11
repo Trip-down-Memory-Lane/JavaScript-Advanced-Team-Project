@@ -4,7 +4,7 @@ let InnovativePunchStarter = require('../punch-starters/innovative-punch-starter
 let FoodPunchStarter = require('../punch-starters/food-punch-starter.js');
 let CraftsPunchStarter = require('../punch-starters/crafts-punch-starter.js');
 
-let id = 1;
+let id = 6;
 
 class CreateModel {
     constructor() {

@@ -1,3 +1,11 @@
+function getPunchStarter (id, database) {
+    for (let punchStarter of database) {
+        if (punchStarter.id === id) {
+            return punchStarter;
+        }
+    }
+}
+
 class ListModel {
     constructor(){
     }
@@ -27,8 +35,15 @@ class ListModel {
         $('.wrapper main').html(html);
     }
 
-    attachEvents() {
-        
+    attachEvents(database) {
+        let tableRows = $('.punch-starter-table tr').each((index, element) => {
+           $(element).on(`click`, function() {
+               let punchStarterId = Number($(this).children()[0].textContent);
+               let punchStarter = getPunchStarter(punchStarterId, database);
+               console.log(punchStarter);
+               $(`.wrapper main`).trigger(`changePage`, [`punch`, punchStarter]);
+           });
+        });
     }
 }
 

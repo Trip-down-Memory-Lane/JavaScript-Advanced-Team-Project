@@ -106,10 +106,6 @@ class HomeModel {
                 sessionStorage.removeItem(`username`);
                 $(`.wrapper main`).trigger(`changePage`, [`home`]);
             });
-
-            //TODO: List redirect onclick
-            //TODO: Create redirect onclick
-			//TODO: Logout redirect onclick
         } else {
             $('.home-redirect').on('click', function () {
                 $('.wrapper main').trigger('changePage', ['home']);
