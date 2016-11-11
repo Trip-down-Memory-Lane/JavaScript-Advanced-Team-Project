@@ -1,46 +1,17 @@
 class CreateModel {
-
-    // attachEvents() {
-    //     $(`.punch-starter-category > select`).on(`change`, function() {
-    //         let selectedCategory = $(`.punch-starter-category > select`).val();
-    //         this._category = selectedCategory;
-    //         switch (this._category) {
-    //             case`Movie`:
-    //                 this.renderCreateMovieModel();
-    //                 this.attachEventsCreateMovieModel();
-    //                 break;
-    //             case`Game`:
-    //                 this.renderCreateGameModel();
-    //                 this.attachEventsCreateGameModel();
-    //                 break;
-    //             case`Innovative`:
-    //                 this.renderCreateInnovativeModel();
-    //                 this.attachEventsCreateInnovativeModel();
-    //                 break;
-    //             case`Food`:
-    //                 this.renderCreateFoodModel();
-    //                 this.attachEventsCreateFoodModel();
-    //                 break;
-    //             case`Crafts`:
-    //                 this.renderCreateCraftModel();
-    //                 this.attachEventsCreateCraftModel();
-    //                 break;
-    //         }
-    //     });
-    // }
     constructor() {
-        this.category='Movie';
+        this.category = 'Movie';
     }
 
     set category(val){
         this._category=val;
         $('.punch-starter-category select').val(val);
-
-
     }
+
     get category() {
         return this._category;
     }
+
     render(categories){
         let mainContainer = document.createDocumentFragment();
         $(`<div class="create-title">Create a PunchStarter</div>`).appendTo(mainContainer);
@@ -94,32 +65,43 @@ class CreateModel {
                 </div>`).appendTo(mainContainer);
         $('.wrapper main').empty().append(mainContainer);
     }
+
     attachEvents(){
         $('.punch-starter-category select').on('change',(ev)=>{
-            let currentCategory = $(ev.target).val();
-            this.category=currentCategory;
-            switch(currentCategory){
-                case 'Movie':
+            let selectedCategory = $(ev.target).val();
+            this.category = selectedCategory;
+            switch (this.category) {
+                case`Movie`:
                     this.renderCreateMovieModel();
                     this.attachEventsCreateMovieModel();
                     break;
-                case 'Game':
+                case`Game`:
                     this.renderCreateGameModel();
                     this.attachEventsCreateGameModel();
                     break;
-                case 'Innovate':
+                case`Innovative`:
                     this.renderCreateInnovativeModel();
                     this.attachEventsCreateInnovativeModel();
                     break;
-                case 'Food':
+                case`Food`:
                     this.renderCreateFoodModel();
-                    this.attachEventsFoodModel();
+                    this.attachEventsCreateFoodModel();
                     break;
-                case 'Crafts':
+                case`Crafts`:
                     this.renderCreateCraftModel();
-                    this.attachCreateCraftModel();
+                    this.attachEventsCreateCraftModel();
                     break;
             }
+        });
+
+        $(`.add-genre-button`).on(`click`, function() {
+            let newGenre = $(`.input-genre`).val();
+            $(`.input-genres`)
+                .append($(`<option>`).val(newGenre).text(newGenre));
+        });
+
+        $(`.remove-genre-button`).on(`click`, function() {
+            $(`.input-genres option:selected`).remove();
         });
     }
 
@@ -130,30 +112,21 @@ class CreateModel {
         //TODO
     }
 
-    //TODO: test render and events.
     renderCreateGameModel(){
         let html =
-            `<div>` +
-                `<label></label>` +
-                `<div class="list-holder">` +
-                    `<select class="input-technologies"></select>` +
-                `</div>` +
-                `<div class="input-holder">` +
-                    `<input class="new-technology" type="text" placeholder="Add technology..."/>` +
-                `</div>` +
-                `<div>` +
-                    `<div class="button-holder">` +
-                        `<button class="add-technology-button">Add</button>` +
-                        `<button class="remove-technology-button">Remove</button>` +
-                    `</div>` +
-                    `<label>Target Price:</label>` +
-                    `<div class="input-holder">` +
-                        `<input class="input-target-price" type="number" placeholder="Target Price..."/>` +
-                    `</div>` +
-                `</div>` +
+            `<label>Technologies:</label>` +
+            `<div class="list-holder">` +
+                `<select class="input-technologies"></select>` +
+            `</div>` +
+            `<div class="input-holder">` +
+                `<input class="new-technology" type="text" placeholder="Add technology..."/>` +
+            `</div>` +
+            `<div class="button-holder">` +
+                `<button class="add-technology-button">Add</button>` +
+                `<button class="remove-technology-button">Remove</button>` +
             `</div>`;
 
-        $(`.individual-parameters`).append(html);
+        $(`.individual-parameters`).empty().append(html);
     }
     attachEventsCreateGameModel(){
         $(`.individual-parameters`).on(`click`, `.add-technology-button`, function() {
@@ -168,7 +141,7 @@ class CreateModel {
     }
 
     renderCreateInnovativeModel(){
-        //TODO
+        $(`.individual-parameters`).empty()
     }
     attachEventsCreateInnovativeModel(){
         //TODO
@@ -176,28 +149,22 @@ class CreateModel {
 
     renderCreateFoodModel(){
         let html =
-            `<div>` +
-                `<label></label>` +
-                `<div class="list-holder">` +
-                    `<select class="input-ingredients"></select>` +
-                `</div>` +
-                `<div class="input-holder">` +
-                `   <input class="new-ingredients" type="text" placeholder="Add ingredient..."/>` +
-                `</div>` +
-                `<div>` +
-                    `<div class="button-holder">` +
-                        `<button class="add-ingredients-button">Add</button>` +
-                        `<button class="remove-ingredients-button">Remove</button>` +
-                    `</div>` +
-                    `<label>Target Price:</label>` +
-                    `<div class="input-holder">` +
-                        `<input class="input-target-price" type="number" placeholder="Target Price..."/>` +
-                    `</div>` +
-                `</div>` +
-                `<textarea class="input-recipe" placeholder="Recipe...">` +
+            `<label></label>` +
+            `<div class="list-holder">` +
+                `<select class="input-ingredients"></select>` +
+            `</div>` +
+            `<div class="input-holder">` +
+            `   <input class="new-ingredients" type="text" placeholder="Add ingredient..."/>` +
+            `</div>` +
+            `<div class="button-holder">` +
+                `<button class="add-ingredients-button">Add</button>` +
+                `<button class="remove-ingredients-button">Remove</button>` +
+            `</div>` +
+            `<div class="input-holder">` +
+                `<textarea class="input-recipe" placeholder="Recipe..." rows="2" />` +
             `</div>`;
 
-        $(`.individual-parameters`).append(html);
+        $(`.individual-parameters`).empty().append(html);
     }
     attachEventsCreateFoodModel(){
         $(`.individual-parameters`).on(`click`, `.add-ingredients-button`, function() {
