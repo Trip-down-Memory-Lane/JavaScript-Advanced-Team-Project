@@ -24,7 +24,6 @@ class PunchStarterModel {
     }
 
     attachEvents(punchStarter) {
-        let that = this;
         $(`.punch-starter-progress button`).on(`click`, function() {
              let donation = $(`.punch-starter-progress input`).val();
             punchStarter._accumulatedMoney += Number(donation);
