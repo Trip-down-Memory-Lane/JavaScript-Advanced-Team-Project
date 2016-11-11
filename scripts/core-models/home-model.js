@@ -1,3 +1,34 @@
+function sortDataBaseDescending(database) {
+    database.sort(function(a, b) { // Sort percentage of money/target ( descending)
+        let percentA = a._accumulatedMoney / a._targetPrice;
+        let percentB = b._accumulatedMoney / b._targetPrice;
+        if (percentA < percentB) {
+            return 1;
+        } else if (percentA > percentB) {
+            return -1;
+        }
+    });
+}
+
+function fillTop3PunchStarts(database) {
+    let ids = [`#first`, `#second`, `#third`];
+    for (let i = 0; i < 3; i++) {
+        renderTop3PunchStarters(database[i], ids[i]);
+    }
+}
+
+function renderTop3PunchStarters(entry, id) {
+    let name = entry._name;
+    let manufacturer = entry._manufacturer;
+    let accumulatedMoney = entry._accumulatedMoney;
+    let targetMoney = entry._targetPrice;
+
+    $(id)
+        .append($(`<label>`).text(name))
+        .append($(`<label>`).text(manufacturer))
+        .append($(`<label>`).text(`${accumulatedMoney} / ${targetMoney}`));
+}
+
 class HomeModel {
     constructor() {
     }
@@ -33,8 +64,8 @@ class HomeModel {
                 `</div>`
             );
 
-            HomeModel.sortDataBaseDescending(database);
-            HomeModel.fillTop3PunchStarts(database);
+            sortDataBaseDescending(database);
+            fillTop3PunchStarts(database);
         } else {
             $('.wrapper header .header-button-holder').html(
                 '<div class="header-button home-redirect">' +
@@ -55,37 +86,6 @@ class HomeModel {
                 '</div>'
             );
         }
-    }
-
-    static sortDataBaseDescending(database) {
-        database.sort(function(a, b) { // Sort percentage of money/target ( descending)
-            let percentA = a._accumulatedMoney / a._targetPrice;
-            let percentB = b._accumulatedMoney / b._targetPrice;
-            if (percentA < percentB) {
-                return 1;
-            } else if (percentA > percentB) {
-                return -1;
-            }
-        });
-    }
-
-    static fillTop3PunchStarts(database) {
-        let ids = [`#first`, `#second`, `#third`];
-        for (let i = 0; i < 3; i++) {
-            HomeModel.renderTop3PunchStarters(database[i], ids[i]);
-        }
-    }
-
-    static renderTop3PunchStarters(entry, id) {
-        let name = entry._name;
-        let manufacturer = entry._manufacturer;
-        let accumulatedMoney = entry._accumulatedMoney;
-        let targetMoney = entry._targetPrice;
-
-        $(id)
-            .append($(`<label>`).text(name))
-            .append($(`<label>`).text(manufacturer))
-            .append($(`<label>`).text(`${accumulatedMoney} / ${targetMoney}`));
     }
 
     attachEvents(isLoggedIn) {
