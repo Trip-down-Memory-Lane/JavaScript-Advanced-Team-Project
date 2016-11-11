@@ -1,32 +1,32 @@
 function validateProperties (id, name, manufacturer, description, genres, targetPrice) {
     if (typeof(id) !== 'number') {
-        throw new TypeError('Invalid id: '+ id);
+        throw new TypeError(`Invalid id: ${id} must be of type number`);
     }
 
     if (typeof(name) !== 'string') {
-        throw new TypeError('Invalid name: '+ name);
+        throw new TypeError(`Invalid name: ${name} must be of type string`);
     }
 
     if (typeof(manufacturer) !== 'string') {
-        throw new TypeError('Invalid manufacturer: '+ manufacturer);
+        throw new TypeError(`Invalid manufacturer: ${manufacturer} must be of type string`);
     }
 
     if (typeof(description) !== 'string') {
-        throw new TypeError('Invalid description: '+ description);
+        throw new TypeError(`Invalid description: ${description} must be of type string`);
     }
 
     if (!Array.isArray(genres)) {
-        throw new TypeError('Invalid genres: '+ genres);
+        throw new TypeError(`Invalid genres: ${genres} must be an array of strings`);
     }
 
     for (let genre of genres) {
         if (typeof(genre) !== 'string') {
-            throw new TypeError('Invalid genre: '+ genre);
+            throw new TypeError(`Invalid genre: ${genre} must be of type string`);
         }
     }
 
     if (typeof(targetPrice) !== 'number') {
-        throw new TypeError('Invalid genre: '+ targetPrice);
+        throw new TypeError(`Invalid target price: ${targetPrice} must be of type number`);
     }
 }
 
@@ -35,8 +35,8 @@ class BasePunchStarter {
         if (new.target === BasePunchStarter) {
             throw new Error('Cannot create an instance of an abstract class');
         }
-        validateProperties(id, name, manufacturer, description, genres, targetPrice);
 
+        validateProperties(id, name, manufacturer, description, genres, targetPrice);
         this._id = id;
         this._name = name;
         this._manufacturer = manufacturer;
@@ -72,7 +72,7 @@ class BasePunchStarter {
 
     set accumulatedMoney (value) {
         if (typeof(value) !== 'number') {
-            throw new TypeError('Invalid accumulatedMoney: ' + value);
+            throw new TypeError(`Invalid accumulatedMoney: ${value} must be of type number`);
         }
 
         this._accumulatedMoney = value;
